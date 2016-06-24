@@ -1,0 +1,245 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-family: 'Open Sans', sans-serif;
+  color: #787878; }
+
+.calculator {
+  background-color: #f0fdff;
+  width: 88rem;
+  height: 58.6rem;
+  margin: auto; }
+
+.country-switcher {
+  width: 86.8rem;
+  height: 7.8rem;
+  margin: 3rem auto;
+  background-color: #ffffff;
+  border: 1px solid #e4f0f2;
+  display: flex;
+  flex-shrink: 1;
+  justify-content: center;
+  align-items: center; }
+
+.country-switcher__text {
+  font-size: 2.1rem;
+  line-height: normal;
+  letter-spacing: 0; }
+
+.input-wraper {
+  width: 80%;
+  border-bottom: 2px solid #01a0fe;
+  position: relative; }
+
+input[type=text] {
+  width: 100%;
+  border: 0;
+  text-align: right;
+  font-size: 3rem;
+  line-height: 5rem;
+  letter-spacing: 0; }
+
+.input-wraper:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  z-index: 100;
+  bottom: 0;
+  width: 2px;
+  height: 10%;
+  background: #01a0fe; }
+
+.input-wraper:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  bottom: 0;
+  width: 2px;
+  height: 10%;
+  background: #01a0fe; }
+
+.country-switcher__select {
+  display: flex;
+  align-items: center; }
+
+.country-switcher__cnt-name {
+  height: 2.8rem;
+  margin: 0 0.5rem 0 0.5rem;
+  padding-right: 1.5rem;
+  font-size: 2.1rem;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #01a0fe;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent url("../assets/arrow.png") no-repeat right;
+  display: flex; }
+
+.currency-switcher {
+  width: 86.8rem;
+  height: 25rem;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.currency-exchange {
+  width: 41.7rem;
+  height: 20.9rem;
+  padding: 3rem;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: 1px solid #e4f0f2;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center; }
+
+.currency-exchange__text {
+  display: box;
+  height: 2rem;
+  font-size: 1.2rem;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #1b3341;
+  width: 100%; }
+
+.currency-rate {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: normal;
+  letter-spacing: 0;
+  margin-top: 2.1rem; }
+
+.remittance-switcher {
+  width: 86.8rem;
+  height: 18.9rem;
+  margin: 2.5rem auto;
+  background-color: #ffffff;
+  border: 1px solid #e4f0f2;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.remittance-switcher__text {
+  font-size: 2.1rem;
+  line-height: 2.1rem;
+  letter-spacing: 0;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 2.3rem 0 0 0;
+  color: #787878; }
+
+.remittance-switcher__speed {
+  width: 39rem;
+  height: 9.6rem;
+  border: 1px solid #bbbbbb;
+  border-radius: 2px;
+  font-size: 1.6rem;
+  line-height: normal;
+  letter-spacing: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.remittance-switcher__speed:hover, .remittance-switcher__speed:active {
+  border: 1px solid #01a0fe; }
+
+.remittance-switcher__speed--disabled, .remittance-switcher__speed--disabled:hover, .remittance-switcher__speed--disabled:active {
+  border: 1px solid #e4f0f2; }
+
+.fm-text {
+  text-align: center; }
+
+.fm-text--fat {
+  font-weight: 600; }
+
+@media (min-width: 300px) and (max-width: 768px) {
+  .calculator {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 2rem;
+    box-sizing: border-box; }
+  .country-switcher {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100vw;
+    margin-top: 0;
+    height: 20rem;
+    padding: 1rem 3rem;
+    box-sizing: border-box; }
+  .country-switcher__select {
+    border-top: 1px dotted #e4f0f2;
+    padding-top: 2rem;
+    width: 100%;
+    box-sizing: border-box; }
+  .currency-switcher {
+    width: 100vw;
+    box-sizing: border-box; }
+  .currency-exchange {
+    width: 100vw;
+    height: 10rem; }
+  .input-wraper {
+    width: 75%; }
+  .currency-rate {
+    width: 100vw;
+    font-size: 2.5rem;
+    line-height: normal;
+    letter-spacing: 0; }
+  .remittance-switcher {
+    width: 100vw;
+    height: 32rem;
+    box-sizing: border-box; } }
+
+@media (min-width: 768px) and (max-width: 1024px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  .calculator {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 2rem;
+    box-sizing: border-box; }
+  .country-switcher {
+    width: 100vw;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0; }
+  .country-switcher__select {
+    width: 48%;
+    justify-content: center; }
+  .currency-switcher {
+    width: 100vw;
+    flex-wrap: wrap; }
+  .currency-exchange {
+    width: 100vw;
+    height: 10rem;
+    justify-content: center;
+    font-size: 1.6rem;
+    line-height: normal;
+    letter-spacing: 0; }
+  .currency-exchange__text {
+    margin-left: 5%;
+    font-size: 1.6rem;
+    line-height: normal;
+    letter-spacing: 0; }
+  .fm-text {
+    width: 100%; }
+  .currency-rate {
+    font-size: 2.5rem;
+    line-height: normal;
+    letter-spacing: 0; }
+  .remittance-switcher {
+    width: 100vw; }
+  .remittance-switcher__speed {
+    width: 40vw; } }

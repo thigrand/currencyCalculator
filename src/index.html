@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <title>EasySend calculator</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9">
+</head>
+<body ng-app="calculator">
+
+  <div class="calculator" ng-controller="CalculatorController as main">
+    <div class="country-switcher country-switcher__text">
+      <div class="fm-text">Przelewam pieniądze &nbsp</div>
+      <div class="country-switcher__select">
+        z
+        <select class="country-switcher__cnt-name"
+                ng-options="country.name for country in main.country.list track by country.id"
+                ng-model="main.country.country_in"
+                ng-change="main.changeCountry()">
+        </select>
+      </div>
+      <div class="country-switcher__select">
+        do
+        <select class="country-switcher__cnt-name"
+                ng-options="destination.name for destination in main.destination.list track by destination.id"
+                ng-model="main.destination.country_out"
+                ng-change="main.changeDestination()">
+        </select>
+      </div>
+    </div>
+
+    <div class="currency-switcher">
+      <div class="currency-exchange ">
+        <span class="currency-exchange__text">
+          Do wysyłania
+        </span>
+        <div class="input-wraper">
+          <input ng-model="main.exchange.money_in"
+                 ng-change="main.reCalculate('in')"
+                 only-numbers=""
+                 type="text">
+        </div>
+
+        <select class="country-switcher__cnt-name"
+                ng-model="main.currency.currency_in"
+                ng-options="currency.name for currency in main.currency.list_in  track by currency.id"
+                ng-change="main.reRate()">
+        </select>
+
+      </div>
+
+      <div class="currency-exchange">
+        <span class="currency-exchange__text">
+          Do otrzymania
+        </span>
+        <div class="input-wraper">
+          <input ng-model="main.exchange.money_out"
+                 ng-change="main.reCalculate('out')"
+                 only-numbers=""
+                 type="text">
+                 <!-- {{main.exchange.money_out | money}} -->
+        </div>
+        <select class="country-switcher__cnt-name"
+                ng-model="main.currency.currency_out"
+                ng-options="currency.name for currency in main.currency.list_out track by currency.id"
+                ng-change="main.reRate()">
+        </select>
+
+      </div>
+      <div class="currency-rate ">
+        1 {{main.currency.currency_in.name}} = {{ main.currency.rate | money }}{{ "  " + main.currency.currency_out.name}}
+      </div>
+    </div>
+
+    <div class="remittance-switcher">
+      <div class="remittance-switcher__text">Wybierz czas dostarczenia</div>
+      <div class="remittance-switcher__speed" >
+        <input type="radio" value="fast" ng-model="main.remittanceSpeed" checked >
+        Przelew &nbsp <span class="fm-text--fat">FAST</span>
+      </div>
+      <div class="remittance-switcher__speed " ng-class="{'remittance-switcher__speed--disabled': main.super_fast_available === false}">
+        <input type="radio" value="superfast" ng-model="main.remittanceSpeed" ng-if="main.super_fast_available">
+        <input type="radio" value="superfast" ng-model="main.remittanceSpeed" ng-if="!main.super_fast_available" disabled>
+        Przelew &nbsp<span class="fm-text--fat">SUPERFAST</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- vendors -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <!-- <script src="../js/angular.min.js"></script> -->
+
+
+  <!-- scripts -->
+  <script src="./js/app.js" ></script>
+
+  <script src="./js/filters/money.js" ></script>
+
+  <script src="./js/services/api-connector.js" ></script>
+  <script src="./js/services/assist-methods.js" ></script>
+  <script src="./js/services/data-adjustment.js" ></script>
+
+  <script src="./js/controllers/main-controller.js" ></script>
+
+  <script src="./js/directives/only-numbers.js" ></script>
+  <script src="./js/directives/calculator.js" ></script>
+
+</body>
+</html>
