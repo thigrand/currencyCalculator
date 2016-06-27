@@ -1,5 +1,6 @@
 function dataAdjustment($q, apiConnector) {
-"use strict";
+    "use strict";
+
     function initData() {
         return $q.all(
             [apiConnector.fetchData("/api/calculator/countries"),
@@ -29,13 +30,28 @@ function dataAdjustment($q, apiConnector) {
         return uniqueNames(newArr);
     }
 
-    function findCurrencyOut(name, array) {
-        console.log(name, array);
+    function calculateStrings(string, number){
+      var result = string.toString().split(" ").join("");
+      result = result.replace(",", ".");
+      result = result * number;
+      return stringForInput(result);
+    }
+
+    function stringForInput(string) {
+        var stringForInput = '';
+        stringForInput = string.toString().split(" ").join("");
+        if(isNaN(string)){
+          stringForInput = '0';
+        }
+        stringForInput = stringForInput.replace(",", ".");
+        stringForInput = parseFloat(stringForInput).toFixed(2).toString();
+        return stringForInput.replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
     return {
         initData: initData,
         currencyList: currencyList,
-        findCurrencyOut: findCurrencyOut
+        stringForInput: stringForInput,
+        calculateStrings: calculateStrings
     };
 }
 angular.module('calculator').factory('dataAdjustment', ['$q', 'apiConnector', dataAdjustment]);

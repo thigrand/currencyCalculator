@@ -17,7 +17,8 @@
         <select class="country-switcher__cnt-name"
                 ng-options="country.name for country in main.country.list track by country.id"
                 ng-model="main.country.country_in"
-                ng-change="main.changeCountry()">
+                ng-change="main.changeCountry()"
+                resizible-select="">
         </select>
       </div>
       <div class="country-switcher__select">
@@ -25,7 +26,8 @@
         <select class="country-switcher__cnt-name"
                 ng-options="destination.name for destination in main.destination.list track by destination.id"
                 ng-model="main.destination.country_out"
-                ng-change="main.changeDestination()">
+                ng-change="main.changeDestination()"
+                resizible-select="">
         </select>
       </div>
     </div>
@@ -106,7 +108,7 @@
   <script src="./js/controllers/main-controller.js" ></script>
 
   <script src="./js/directives/only-numbers.js" ></script>
-  <script src="./js/directives/calculator.js" ></script>
+  <script src="./js/directives/resizible-select.js" ></script>
 
 </body>
 </html>

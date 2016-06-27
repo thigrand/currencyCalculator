@@ -14,9 +14,10 @@ function assistMethods() {
       });
       return currencyPair && currencyPair.super_fast_available === true ? true : false;
     }
+
     return {
         isInArray: isInArray,
-        isFastAvailable: isFastAvailable
+        isFastAvailable: isFastAvailable,
     };
 }
 angular.module('calculator').factory('assistMethods', [ assistMethods]);

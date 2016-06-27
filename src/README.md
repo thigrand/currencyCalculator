@@ -1,0 +1,3 @@
+Należy odpalic node proxy aby moc dostac sie do danych. 
+Co do CSS to celowo jest to notacja BEMowska bez zastosowania w całości co do idei. Powodem jest szczerośc. Spodobalo mi sie to podejscie i ostatnio je cwicze. Wciaz jednak mam duzo przyzwyczajen z pracy na zagniezdzonym stylowaniu. Dlatego pokazuje moja transformacje, żeby nie wybielac swoich umiejetnosci. Uczę się i chcę byc lepszy, chcę takze, żebyście zobaczyli mój rzeczywisty poziom. Dzięki temu bedziecie mogli ocenic bardziej trafnie jaka rzeczywista wartosc bede miał dla waszego teamu. Chcę się rozwijac i byc coraz lepszy, ale wszystkiego jeszcze nie umiem. 
+Pozdrawiam:)

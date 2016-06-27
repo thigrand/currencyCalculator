@@ -1,31 +1,23 @@
-function onlyNumbers() {
+function onlyNumbers(dataAdjustment) {
     "use strict";
     return {
         restrict: 'A',
-        link: function(scope, elm ) {
+        link: function(scope, elm) {
+            elm.on('keydown', function(event) {
+                var $input = $(this);
+                var value = $input.val();
+                value = value.split(" ").join(""); //delete gaps from value
+            });
             elm.on('keyup', function(event) {
                 var $input = $(this);
                 var value = $input.val();
-                value = value.replace(/[^0-9,.]+/g, '').replace(".",",");
-            //     console.log(event);
-                console.log("start", value, typeof value);
-            //     // parseFloat(value.replace(",",".")).toFixed(2).toString();
-            //     // var temp = parseFloat(value.replace(",",".")).toFixed(2);
-            //     // console.log(temp);
-            //     // value = temp;
-
-
-            //.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-                if((value === 'undefined' || value === 'null' || isNaN(value)) && typeof value !== 'string'){
-                  value = 0;
+                if (isNaN(parseFloat(value))) {
+                    value = '0';
                 }
-            //     // console.log( parseFloat(value.replace(",",".")).toFixed(2).toString());
-            //
-            //        // commas, not dots
-            //        // gaps
-            //        //only numbers and dots, commas
-            //     console.log("end", value, typeof value);
-                $input.val(value);
+                value = value.replace(/[^0-9,.]+/g, '');
+                value = parseFloat(value.replace(",", ".")).toFixed(0).toString().replace(".", ",");
+
+                $input.val(value.replace(/\B(?=(\d{3})+(?!\d))/g, " "));
                 if (event.which == 64 || event.which == 16) {
                     // to allow numbers
                     return false;
@@ -46,4 +38,4 @@ function onlyNumbers() {
         }
     };
 }
-angular.module('calculator').directive('onlyNumbers', [onlyNumbers]);
+angular.module('calculator').directive('onlyNumbers', ['dataAdjustment', onlyNumbers]);

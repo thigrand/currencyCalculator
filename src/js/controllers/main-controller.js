@@ -40,7 +40,7 @@ function CalculatorController(dataAdjustment, apiConnector, assistMethods) {
         list_out: []
     };
     main.exchange = {
-        money_in: 100,
+        money_in: dataAdjustment.stringForInput(100),
         money_out: 0,
     };
     main.super_fast_available = false;
@@ -48,19 +48,15 @@ function CalculatorController(dataAdjustment, apiConnector, assistMethods) {
     main.remittanceSpeed = "fast";
 
     main.reCalculate = function (side) {
-      // console.log(main);
-      if(typeof main.exchange.money_in === 'string' || typeof main.exchange.money_out === 'string'){
-        main.exchange.money_in = parseFloat(main.exchange.money_in.toString().replace(",","."));
-        main.exchange.money_out = parseFloat(main.exchange.money_out.toString().replace(",","."));
-
-      }
-      // console.log( main.exchange.money_in,  main.exchange.money_out );
         if (side === "in") {
-            main.exchange.money_out = (main.exchange.money_in * main.currency.rate).toFixed(2).toString();
+            main.exchange.money_out = dataAdjustment.calculateStrings(main.exchange.money_in , main.currency.rate);
         } else {
-            main.exchange.money_in = (main.exchange.money_out / main.currency.rate).toFixed(2).toString();
+            main.exchange.money_in = dataAdjustment.calculateStrings(main.exchange.money_out, 1 / main.currency.rate);
         }
-      // console.log( main.exchange.money_in,  main.exchange.money_out );
+
+        if(main.exchange.money_in === ""){
+          main.exchange.money_out = 0;
+        }
     };
     main.reRate = function reRate() {
         if(!main.currency.currency_out){
@@ -78,33 +74,35 @@ function CalculatorController(dataAdjustment, apiConnector, assistMethods) {
     };
     main.changeCountry = function changeCountry() {
         var currencyOutput = main.currency.currency_out;
-        main.exchange.money_in = 100;
-        main.reRate();
+        main.exchange.money_in = dataAdjustment.stringForInput(100);
+
         apiConnector.fetchData("/api/calculator/currencies/" +
             main.country.country_in.id + "/" +
             main.destination.country_out.id).then(function(response) {
             var currencyArray = response.data;
             main.remittance = currencyArray;
+            console.log(response.data);
             main.super_fast_available = assistMethods.isFastAvailable(main.currency, currencyArray);
             main.currency.list_in = dataAdjustment.currencyList(currencyArray, "currency_in");
             main.currency.list_out = dataAdjustment.currencyList(currencyArray, "currency_out");
             main.currency.currency_in = currencyArray[0].currency_in;
             main.currency.currency_out = currencyOutput;
+            main.reRate();
         });
     };
     main.changeDestination = function changeDestination() {
-      main.exchange.money_in = 100;
-      main.reRate();
+      main.exchange.money_in = dataAdjustment.stringForInput(100);
       apiConnector.fetchData("/api/calculator/currencies/" +
           main.country.country_in.id + "/" +
           main.destination.country_out.id).then(function(response) {
+            console.log(response.data);
           var currencyArray = response.data;
           main.remittance = currencyArray;
-          console.log("changeDestination", main);
           main.super_fast_available = assistMethods.isFastAvailable(main.currency, currencyArray);
           main.currency.list_out = dataAdjustment.currencyList(currencyArray, "currency_out");
           main.currency.currency_out = assistMethods.isInArray(main.currency.list_out, main.destination.country_out.default_currency);
-          console.log(main.currency.currency_out);
+          main.reRate();
+
       });
     };
 
@@ -117,7 +115,7 @@ function CalculatorController(dataAdjustment, apiConnector, assistMethods) {
         main.currency.list_in = dataAdjustment.currencyList(initData[2], "currency_in");
         main.currency.list_out = dataAdjustment.currencyList(initData[2], "currency_out");
         main.currency.rate = initData[3].rate;
-        main.exchange.money_out = main.exchange.money_in * main.currency.rate;
+        main.exchange.money_out = dataAdjustment.calculateStrings(main.exchange.money_in , main.currency.rate);
     });
 }
 angular.module('calculator').controller('CalculatorController', ['dataAdjustment', 'apiConnector', 'assistMethods', CalculatorController]);
